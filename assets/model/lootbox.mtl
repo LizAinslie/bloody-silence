@@ -1,0 +1,6 @@
+# Made in Blockbench 4.2.4
+newmtl m_0
+map_Kd lootbox_1_bottom.png
+newmtl m_1
+map_Kd lootbox_1_top.png
+newmtl none

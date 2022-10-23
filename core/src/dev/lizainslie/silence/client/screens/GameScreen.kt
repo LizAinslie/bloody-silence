@@ -2,15 +2,17 @@ package dev.lizainslie.silence.client.screens
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen
-import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.PerspectiveCamera
-import com.badlogic.gdx.graphics.VertexAttributes
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g3d.*
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder
+import com.badlogic.gdx.graphics.g3d.utils.CameraInputController
 import dev.lizainslie.silence.BloodySilenceGame
+
 
 class GameScreen(private val game: BloodySilenceGame) : Screen {
     private val camera = PerspectiveCamera(
@@ -21,8 +23,10 @@ class GameScreen(private val game: BloodySilenceGame) : Screen {
 
     private val environment = Environment()
     private val modelBatch = ModelBatch()
-    private val model: Model
-    private val modelInstance: ModelInstance
+    private val modelInstances: MutableList<ModelInstance> = mutableListOf()
+    private val cameraController = CameraInputController(camera)
+    private val assetManager = AssetManager()
+    private var loading: Boolean
 
     init {
         camera.position.set(10f, 10f, 10f)
@@ -34,23 +38,42 @@ class GameScreen(private val game: BloodySilenceGame) : Screen {
         environment.set(ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f))
         environment.add(DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f))
 
-        val modelBuilder = ModelBuilder()
-        model = modelBuilder.createBox(
-            5f, 5f, 5f,
-            Material(ColorAttribute.createDiffuse(Color.GREEN)),
-            VertexAttributes.Usage.Position.toLong() or VertexAttributes.Usage.Normal.toLong()
-        )
-        modelInstance = ModelInstance(model)
+        game.multiplexer.addProcessor(cameraController)
+
+        assetManager.load("model/lootbox.g3db", Model::class.java)
+        assetManager.load("model/lootbox_1_bottom.png", Texture::class.java)
+        assetManager.load("model/lootbox_1_top.png", Texture::class.java)
+        loading = true
+
     }
 
     override fun show() {}
 
+    private fun assetsLoaded() {
+        val model = assetManager.get("model/lootbox.g3db", Model::class.java)
+        val inst = ModelInstance(model)
+        val texture0 = assetManager.get("model/lootbox_1_bottom.png", Texture::class.java)
+        val texture1 = assetManager.get("model/lootbox_1_top.png", Texture::class.java)
+
+        texture0.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
+        texture1.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
+
+        inst.getMaterial("m_0").set(TextureAttribute.createDiffuse(texture0))
+        inst.getMaterial("m_1").set(TextureAttribute.createDiffuse(texture1))
+
+        modelInstances += inst
+        loading = false
+    }
+
     override fun render(delta: Float) {
+        if (loading && assetManager.update()) assetsLoaded()
+        cameraController.update()
+
         Gdx.gl.glViewport(0, 0, Gdx.graphics.width, Gdx.graphics.height)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
 
         modelBatch.begin(camera)
-        modelBatch.render(modelInstance, environment)
+        modelBatch.render(modelInstances, environment)
         modelBatch.end()
     }
 
@@ -60,6 +83,7 @@ class GameScreen(private val game: BloodySilenceGame) : Screen {
     override fun hide() {}
     override fun dispose() {
         modelBatch.dispose()
-        model.dispose()
+        modelInstances.clear()
+        assetManager.dispose()
     }
 }
