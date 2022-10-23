@@ -1,6 +1,6 @@
 package dev.lizainslie.silence.prop
 
-import dev.lizainslie.silence.player.Player
+import dev.lizainslie.silence.objects.player.Player
 
 interface Prop {
     val descriptor: String
