@@ -1,5 +1,6 @@
 package dev.lizainslie.silence.screens.base
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.Screen
 import dev.lizainslie.silence.BloodySilenceGame
@@ -16,19 +17,21 @@ class TextScreen(
         dispose()
     }
 
-    override fun show() {
+    init {
         game.multiplexer.addProcessor(spaceListener)
     }
+
+    override fun show() {}
 
     override fun render(delta: Float) {
         super.render(delta)
 
         game.batch.begin()
 
-        var lineY = 100f
+        var lineY = 50f
 
         lines.forEach { line ->
-            game.font.draw(game.batch, line, 100f, lineY)
+            game.font.draw(game.batch, line, 50f, Gdx.graphics.height - lineY)
             lineY += 50f
         }
 

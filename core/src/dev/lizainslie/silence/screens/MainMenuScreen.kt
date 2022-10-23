@@ -21,9 +21,11 @@ class MainMenuScreen(game: BloodySilenceGame) : MenuScreen(game) {
         dispose()
     }
 
-    override fun show() {
+    init {
         game.multiplexer.addProcessor(spaceListener)
     }
+
+    override fun show() {}
 
     override fun render(delta: Float) {
         super.render(delta)
