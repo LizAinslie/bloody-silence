@@ -1,10 +1,10 @@
-package dev.lizainslie.silence.screens.base
+package dev.lizainslie.silence.client.screens.base
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.Screen
 import dev.lizainslie.silence.BloodySilenceGame
-import dev.lizainslie.silence.screens.util.KeyPressListener
+import dev.lizainslie.silence.client.util.KeyPressListener
 
 class TextScreen(
     game: BloodySilenceGame,

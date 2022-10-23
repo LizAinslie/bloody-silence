@@ -1,10 +1,10 @@
-package dev.lizainslie.silence.screens
+package dev.lizainslie.silence.client.screens
 
 import com.badlogic.gdx.Input
 import dev.lizainslie.silence.BloodySilenceGame
-import dev.lizainslie.silence.screens.base.MenuScreen
-import dev.lizainslie.silence.screens.base.TextScreen
-import dev.lizainslie.silence.screens.util.KeyPressListener
+import dev.lizainslie.silence.client.screens.base.MenuScreen
+import dev.lizainslie.silence.client.screens.base.TextScreen
+import dev.lizainslie.silence.client.util.KeyPressListener
 
 class MainMenuScreen(game: BloodySilenceGame) : MenuScreen(game) {
     private val spaceListener = KeyPressListener(Input.Keys.SPACE) {

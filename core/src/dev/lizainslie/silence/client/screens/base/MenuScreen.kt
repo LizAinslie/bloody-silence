@@ -1,4 +1,4 @@
-package dev.lizainslie.silence.screens.base
+package dev.lizainslie.silence.client.screens.base
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Screen

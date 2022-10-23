@@ -1,4 +1,4 @@
-package dev.lizainslie.silence.screens.util
+package dev.lizainslie.silence.client.util
 
 import com.badlogic.gdx.InputAdapter
 
