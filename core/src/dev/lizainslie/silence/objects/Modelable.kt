@@ -1,4 +1,4 @@
-package dev.lizainslie.silence.asset.model
+package dev.lizainslie.silence.objects
 
 import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.graphics.g3d.ModelBatch

@@ -2,7 +2,7 @@ package dev.lizainslie.silence.objects.player
 
 import com.badlogic.gdx.graphics.g3d.Model
 import com.badlogic.gdx.graphics.g3d.ModelBatch
-import dev.lizainslie.silence.asset.model.Modelable
+import dev.lizainslie.silence.objects.Modelable
 
 class Player(
     val name: String,
