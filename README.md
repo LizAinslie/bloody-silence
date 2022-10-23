@@ -7,4 +7,4 @@ If you find a bug and wish to fix it, you may PR your fix. All other
 contributions will be ignored.
 
 ## License
-Source-visible, all rights Reserved. Read [the license](LICENSE) for more info.
+Source-visible, all rights reserved. Read [the license](LICENSE) for more info.
