@@ -1,4 +1,4 @@
-package dev.lizainslie.silence.prop
+package dev.lizainslie.silence.objects.prop
 
 import dev.lizainslie.silence.objects.player.Player
 

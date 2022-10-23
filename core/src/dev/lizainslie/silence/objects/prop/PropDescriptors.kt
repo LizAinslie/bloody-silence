@@ -1,4 +1,4 @@
-package dev.lizainslie.silence.prop
+package dev.lizainslie.silence.objects.prop
 
 /**
  * Prop descriptors are baked into map and object models and allow the game to
