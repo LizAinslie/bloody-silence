@@ -1,13 +1,20 @@
 package dev.lizainslie.silence.objects
 
-import dev.lizainslie.silence.player.Player
+import com.badlogic.gdx.graphics.g3d.Model
+import com.badlogic.gdx.graphics.g3d.ModelBatch
+import dev.lizainslie.silence.asset.model.Modelable
+import dev.lizainslie.silence.objects.player.Player
 import dev.lizainslie.silence.prop.Prop
 import dev.lizainslie.silence.prop.PropDescriptors
 
-class CrateObject : Prop {
+class CrateObject : Prop, Modelable {
     override val descriptor = PropDescriptors.CRATE
 
     override fun onInteract(player: Player) {
         // todo: crate logic
+    }
+
+    override fun getModel(modelBatch: ModelBatch): Model {
+        TODO("Not yet implemented")
     }
 }
