@@ -9,6 +9,7 @@ object DesktopLauncher {
     fun main(arg: Array<String>) {
         val config = Lwjgl3ApplicationConfiguration()
         config.setForegroundFPS(60)
+        config.useVsync(true);
         config.setTitle("Bloody Silence")
         Lwjgl3Application(BloodySilenceGame(), config)
     }

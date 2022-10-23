@@ -1,27 +1,20 @@
 package dev.lizainslie.silence
 
-import com.badlogic.gdx.ApplicationAdapter
-import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.Game
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.utils.ScreenUtils
+import dev.lizainslie.silence.screens.MainMenuScreen
 
-class BloodySilenceGame : ApplicationAdapter() {
-    private var batch: SpriteBatch? = null
-    private var img: Texture? = null
+class BloodySilenceGame : Game() {
+    lateinit var batch: SpriteBatch
+    lateinit var font: BitmapFont
+
     override fun create() {
         batch = SpriteBatch()
-        img = Texture("badlogic.jpg")
-    }
-
-    override fun render() {
-        ScreenUtils.clear(1f, 0f, 0f, 1f)
-        batch!!.begin()
-        batch!!.draw(img, 0f, 0f)
-        batch!!.end()
+        font = BitmapFont()
+        screen = MainMenuScreen(this)
     }
 
     override fun dispose() {
-        batch!!.dispose()
-        img!!.dispose()
     }
 }
